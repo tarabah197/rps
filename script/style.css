@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #30343F;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #E4D9FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.game-container{
+    display: flex;
+    max-height: 500px;
+}
+
+.container-style{
+    border-radius: 10px;
+    padding: 50px;
+    background-color: #FAFAFF;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
