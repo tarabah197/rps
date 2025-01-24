@@ -6,6 +6,7 @@
     <title>Rock || Paper || Scissors</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="game-container container-style">
@@ -13,15 +14,21 @@
         <div class="game-score">
             <h2>Score</h2>
             <div class="score-container">
-                <div>
-                <p>User</p>
-                <p class="score" id="user-score">0</p>
+                <div class="score">
+                <h3>User</h3>
+                <p class="interface" id="user-score">0</p>
                 </div>
-                <div>
-                <p>Computer</p>
-                <p class="score" id="computer-score">0</p>
+                <button id="restart">
+                    <span class="material-icons btn">
+                        replay
+                    </span>
+                </button>
+                <div class="score">
+                <h3>Computer</h3>
+                <p class="interface" id="computer-score">0</p>
                 </div>
             </div>
+            <p id="para-feedback">...</p>
         </div>
         <section class="game-area">
             <button class="btn" id="rock">Rock</button>

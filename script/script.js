@@ -6,6 +6,23 @@
 //IF human won --> Write Congrats
 //ELSE try again
 
+let humanChoice;
+const userChoice = document.querySelector(".game-area");
+const gameScore = document.querySelector(".game-score");
+const paraFeedback = document.querySelector('#para-feedback');
+const userScorePara = document.querySelector('#user-score');
+const computerScorePara = document.querySelector('#computer-score');
+const restartBtn = document.querySelector('#restart');
+
+restartBtn.addEventListener('click', restart);
+    
+    
+function restart() {
+    userScorePara.textContent = 0;
+    computerScorePara.textContent = 0;
+    paraFeedback.textContent = "...";
+}
+
 function getComputerChoice() {
     let randomChoice = Math.floor(Math.random()*3) + 1;
     let computerChoice = "";
@@ -20,63 +37,58 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-// function getHumanChoice(humanChoice = prompt("Enter: Rock || Paper || Scissors")) {
-//     if (humanChoice !== undefined || humanChoice !== null || humanChoice !== "") {
-//         console.log(humanChoice);
-//     } else {
-//         getHumanChoice();
-//     }
-//     return humanChoice;
-// }
-
-function playRound(computerChoice,humanChoice){
+function playRound(humanChoice,computerChoice){
     if (humanChoice === computerChoice) {
-        return "It's a tie!";
+        return paraFeedback.textContent = "It's a tie!";
     } else if (humanChoice === "Rock" && computerChoice === "Scissors") {
-        return "You win! Rock beats Scissors!";
+        return paraFeedback.textContent = "You win! Rock beats Scissors!";
     } else if (humanChoice === "Paper" && computerChoice === "Rock") {
-        return "You win! Paper beats Rock!";
+        return paraFeedback.textContent = "You win! Paper beats Rock!";
     } else if (humanChoice === "Scissors" && computerChoice === "Paper") {
-        return "You win! Scissors beats Paper!";
+        return paraFeedback.textContent = "You win! Scissors beats Paper!";
     } else {
-        return "You lose! " + computerChoice + " beats " + humanChoice + "!";
+        return paraFeedback.textContent = "You lose! " + computerChoice + " beats " + humanChoice + "!";
     }
 }
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
+    let computerChoice = getComputerChoice();
+    let humanScore = Number(userScorePara.textContent);
+    let computerScore = Number(computerScorePara.textContent);
 
-    // for (let i = 0; i < 5; i++) {
-         let humanChoice = getHumanChoice();
-         let computerChoice = getComputerChoice();
-         let result = playRound(humanChoice, computerChoice);
-         console.log(result);
+    let result = playRound(humanChoice, computerChoice);
 
-        if (result.includes("win")) {
-            humanScore++;
-        } else if (result.includes("lose")) {
-            computerScore++;
+    if (result.includes("win")) {
+        humanScore++;
+        userScorePara.textContent = humanScore;
+    } else if (result.includes("lose")) {
+        computerScore++;
+        computerScorePara.textContent = computerScore;
+    }
+
+    if (humanScore === 5 || computerScore === 5) {
+        if (humanScore > computerScore) {
+            restart();
+            return paraFeedback.textContent = "You win the game!";
+        } else if (humanScore < computerScore) {
+            restart();
+            return paraFeedback.textContent = "You lose the game!";
+        } else {
+            restart();
+            return paraFeedback.textContent = "It's a tie!";
         }
-
-    if (humanScore > computerScore) {
-        console.log("Congratulations! You win the game!");
-    } else if (humanScore < computerScore) {
-        console.log("You lose the game!");
-    } else {
-        console.log("It's a tie game!");
     }
 }
 
+userChoice.addEventListener('click', function(event){
+    let btn = event.target.closest('button');
 
-const rock = document.querySelector("#rock");
-const paper = document.querySelector("#paper");
-const scissors = document.querySelector("#scissors");
-const game = document.querySelector(".game-area");
+    if (!btn) return;
 
-game.addEventListener('click', function(event){
-    let humanChoice = event.target.textContent;
-    let computerChoice = getComputerChoice();
-    let result = playRound(computerChoice, humanChoice);
-    console.log(result);
+    if (!userChoice.contains(btn)) return;
+
+    humanChoice = event.target.textContent;
+    playGame();
+
+    return;
 });
