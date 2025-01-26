@@ -1,12 +1,7 @@
-//Rock Paper Scissors
-//CREATE function to random computer choice +
-//CREATE human input +/-
-//CREATE function to compare to choices
-//Show to choices (human and computer)
-//IF human won --> Write Congrats
-//ELSE try again
+//Rock || Paper || Scissors
 
 let humanChoice;
+const numberOfGames = 5;
 const userChoice = document.querySelector(".game-area");
 const gameScore = document.querySelector(".game-score");
 const paraFeedback = document.querySelector('#para-feedback');
@@ -15,8 +10,7 @@ const computerScorePara = document.querySelector('#computer-score');
 const restartBtn = document.querySelector('#restart');
 
 restartBtn.addEventListener('click', restart);
-    
-    
+       
 function restart() {
     userScorePara.textContent = 0;
     computerScorePara.textContent = 0;
@@ -24,16 +18,10 @@ function restart() {
 }
 
 function getComputerChoice() {
-    let randomChoice = Math.floor(Math.random()*3) + 1;
-    let computerChoice = "";
+    let rpsChoice = ["Rock", "Paper", "Scissors"];
+    let choice = Math.floor(Math.random()*rpsChoice.length);
+    let computerChoice = rpsChoice[choice];
 
-    if (randomChoice === 1) {
-        computerChoice = "Rock";
-    } else if (randomChoice === 2) {
-        computerChoice = "Paper";
-    } else {
-        computerChoice = "Scissors";
-    }
     return computerChoice;
 }
 
@@ -66,7 +54,7 @@ function playGame() {
         computerScorePara.textContent = computerScore;
     }
 
-    if (humanScore === 5 || computerScore === 5) {
+    if (humanScore === numberOfGames || computerScore === numberOfGames) {
         if (humanScore > computerScore) {
             restart();
             return paraFeedback.textContent = "You win the game!";
