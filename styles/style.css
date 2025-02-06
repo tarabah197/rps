@@ -90,6 +90,7 @@ h3{
 /* button */ 
 button{
     border: none;
+    background-color: var(--secondary-color);
 }
 
 .btn {
